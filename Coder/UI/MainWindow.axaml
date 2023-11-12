@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1520" d:DesignHeight="850"
+        x:Class="Coder.UI.MainWindow"
+        Title="Coder" CanResize="False" Width="1520" Height="850">
+    <Grid ShowGridLines="False" Margin="10"
+          ColumnDefinitions="750, 750"
+          RowDefinitions="Auto, Auto, Auto">
+        <Label Grid.Row="0" Grid.Column="0" Margin="10">Исходный текст</Label>
+        <Label Grid.Row="0" Grid.Column="1" Margin="10">Зашифрованный текст</Label>
+
+        <TextBox Name="PlainTextTextBox" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Margin="10" Height="700"></TextBox>
+        <TextBox Name="EncodedTextTextBox" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Margin="10" Height="700"></TextBox>
+
+        <Button Grid.Row="2" Grid.Column="0" Margin="10" Width="150" Height="50" HorizontalAlignment="Right"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="EncodeButtonClicked"
+                Content="Зашифровать">
+            <FlyoutBase.AttachedFlyout>
+                <Flyout ShowMode="TransientWithDismissOnPointerMoveAway"></Flyout>
+            </FlyoutBase.AttachedFlyout>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="1" Margin="10" Width="150" Height="50" HorizontalAlignment="Left"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="CrackButtonClicked"
+                Content="Взломать">
+            <FlyoutBase.AttachedFlyout>
+                <Flyout ShowMode="TransientWithDismissOnPointerMoveAway"></Flyout>
+            </FlyoutBase.AttachedFlyout>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="1" Margin="10" Width="150" Height="50" HorizontalAlignment="Right"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="DecodeButtonClicked"
+                Content="Расшифровать">
+            <FlyoutBase.AttachedFlyout>
+                <Flyout ShowMode="TransientWithDismissOnPointerMoveAway"></Flyout>
+            </FlyoutBase.AttachedFlyout>
+        </Button>
+
+
+        <TextBox Name="ShiftTextBox" Grid.Row="2" Grid.Column="0" Margin="10" Width="300" HorizontalAlignment="Left"
+                 Watermark="Сдвиг" UseFloatingWatermark="True">
+        </TextBox>
+    </Grid>
+</Window>
