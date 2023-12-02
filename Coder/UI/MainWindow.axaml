@@ -11,25 +11,25 @@
         <Label Grid.Row="0" Grid.Column="0" Margin="10">Исходный текст</Label>
         <Label Grid.Row="0" Grid.Column="1" Margin="10">Зашифрованный текст</Label>
 
-        <TextBox Name="PlainTextTextBox" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Margin="10" Height="700"></TextBox>
-        <TextBox Name="EncodedTextTextBox" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Margin="10" Height="700"></TextBox>
+        <TextBox Name="PlainTB" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Margin="10" Height="700"></TextBox>
+        <TextBox Name="EncodedTB" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Margin="10" Height="700"></TextBox>
 
         <Button Grid.Row="2" Grid.Column="0" Margin="10" Width="150" Height="50" HorizontalAlignment="Right"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="EncodeButtonClicked"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="EncodeClick"
                 Content="Зашифровать">
             <FlyoutBase.AttachedFlyout>
                 <Flyout ShowMode="TransientWithDismissOnPointerMoveAway"></Flyout>
             </FlyoutBase.AttachedFlyout>
         </Button>
         <Button Grid.Row="2" Grid.Column="1" Margin="10" Width="150" Height="50" HorizontalAlignment="Left"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="CrackButtonClicked"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="CrackClick"
                 Content="Взломать">
             <FlyoutBase.AttachedFlyout>
                 <Flyout ShowMode="TransientWithDismissOnPointerMoveAway"></Flyout>
             </FlyoutBase.AttachedFlyout>
         </Button>
         <Button Grid.Row="2" Grid.Column="1" Margin="10" Width="150" Height="50" HorizontalAlignment="Right"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="DecodeButtonClicked"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="DecodeClick"
                 Content="Расшифровать">
             <FlyoutBase.AttachedFlyout>
                 <Flyout ShowMode="TransientWithDismissOnPointerMoveAway"></Flyout>
@@ -37,7 +37,7 @@
         </Button>
 
 
-        <TextBox Name="ShiftTextBox" Grid.Row="2" Grid.Column="0" Margin="10" Width="300" HorizontalAlignment="Left"
+        <TextBox Name="ShiftTB" Grid.Row="2" Grid.Column="0" Margin="10" Width="300" HorizontalAlignment="Left"
                  Watermark="Сдвиг" UseFloatingWatermark="True">
         </TextBox>
     </Grid>
