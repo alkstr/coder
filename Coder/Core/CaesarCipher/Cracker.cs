@@ -6,24 +6,25 @@ namespace Coder.Core.CaesarCipher;
 
 public static class Cracker
 {
+    // finds most possible shift
     public static string Crack(string text)
     {
-        var (shift, min) = (0, double.MaxValue);
-        for (var i = 0; i < Utilities.LowerRussianAlphabet.Length; i++)
+        var (shift, prob) = (0, double.MaxValue);
+        for (var s = 0; s < Utilities.LowerRussianAlphabet.Length; s++)
         {
-            var newMin = CalculateShiftValueProbability(text, i);
-            if (newMin < min)
+            var p = CalculateShiftValueProbability(text, s);
+            if (p < prob)
             {
-                (shift, min) = (i, newMin);
+                (shift, prob) = (s, p);
             }
         }
 
         return Decoder.Decode(text, shift);
     }
     
+    // using least squares method
     private static double CalculateShiftValueProbability(string text, int shift)
     {
-        // using least squares method
         var charToFrequency = CalculateCharFrequencies(text);
 
         var leastSquaresSum = charToFrequency
