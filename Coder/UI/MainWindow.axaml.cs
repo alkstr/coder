@@ -1,3 +1,4 @@
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
@@ -27,43 +28,49 @@ public partial class MainWindow : Window
     // Caesar Cipher
     // ///////////////////////
     
-    public void EncodeButtonClicked(object source, RoutedEventArgs args)
+    public void EncodeClick(object source, RoutedEventArgs args)
     {
-        if (string.IsNullOrEmpty(PlainTextTextBox.Text))
+        if (string.IsNullOrEmpty(PlainTB.Text))
         {
             ShowErrorFlyout(source, "Исходный текст не может быть пустым");
             return;
         }
-        if (!int.TryParse(ShiftTextBox.Text, out var shift))
+        if (!int.TryParse(ShiftTB.Text, out var shift))
         {
             ShowErrorFlyout(source, "Сдвиг должен быть целым числом");
             return;
         }
-        EncodedTextTextBox.Text = Core.CaesarCipher.Encoder.Encode(PlainTextTextBox.Text, shift);
+        
+        PlainTB.Text = string.Concat(PlainTB.Text.Select(char.ToLower));
+        EncodedTB.Text = Core.CaesarCipher.Encoder.Encode(PlainTB.Text, shift);
     }
 
-    public void DecodeButtonClicked(object source, RoutedEventArgs args)
+    public void DecodeClick(object source, RoutedEventArgs args)
     {
-        if (string.IsNullOrEmpty(EncodedTextTextBox.Text))
+        if (string.IsNullOrEmpty(EncodedTB.Text))
         {
             ShowErrorFlyout(source, "Зашифрованный текст не может быть пустым");
             return;
         }
-        if (!int.TryParse(ShiftTextBox.Text, out var shift))
+        if (!int.TryParse(ShiftTB.Text, out var shift))
         {
             ShowErrorFlyout(source, "Сдвиг должен быть целым числом");
             return;
         }
-        PlainTextTextBox.Text = Core.CaesarCipher.Decoder.Decode(EncodedTextTextBox.Text, shift);
+        
+        EncodedTB.Text = string.Concat(EncodedTB.Text.Select(char.ToLower));
+        PlainTB.Text = Core.CaesarCipher.Decoder.Decode(EncodedTB.Text, shift);
     }
 
-    public void CrackButtonClicked(object source, RoutedEventArgs args)
+    public void CrackClick(object source, RoutedEventArgs args)
     {
-        if (string.IsNullOrEmpty(EncodedTextTextBox.Text))
+        if (string.IsNullOrEmpty(EncodedTB.Text))
         {
             ShowErrorFlyout(source, "Зашифрованный текст не может быть пустым");
             return;
         }
-        PlainTextTextBox.Text = Core.CaesarCipher.Cracker.Crack(EncodedTextTextBox.Text);
+
+        EncodedTB.Text = string.Concat(EncodedTB.Text.Select(char.ToLower));
+        PlainTB.Text = Core.CaesarCipher.Cracker.Crack(EncodedTB.Text);
     }
 }
