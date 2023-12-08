@@ -6,8 +6,10 @@ namespace Coder.Core.CaesarCipher;
 
 public static class Utilities
 {
-    // public static readonly char[] LowerEnglishAlphabet = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+    public static readonly char[] LowerEnglishAlphabet = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+    
     public static readonly char[] LowerRussianAlphabet = "абвгдежзийклмнопрстуфхцчшщъыьэюя".ToCharArray();
+    public static readonly Dictionary<char, char> LowerRussianSpecialConverts = new() { { 'ё', 'е' } };
     public static readonly Dictionary<char, double> LowerRussianCharToFrequencyInText = new()
     {
         { 'а', 0.062 }, { 'б', 0.014 }, { 'в', 0.038 }, { 'г', 0.013 }, { 'д', 0.025 }, { 'е', 0.072 }, { 'ё', 0.072 },
@@ -26,10 +28,12 @@ public static class Utilities
         return alphabet[(Array.IndexOf(alphabet, ch) + value) % alphabet.Length];
     }
     
+    // lower case, convert е => ё, remove non-alphabet symbols
     public static IEnumerable<char> CipherNormalize(IEnumerable<char> str)
     {
         return str
             .Select(char.ToLower)
-            .Where(c => LowerRussianAlphabet.Contains(c));
+            .Select(c => LowerRussianSpecialConverts.TryGetValue(c, out var convert) ? convert : c)
+            .Where(c => LowerRussianAlphabet.Contains(c) || LowerEnglishAlphabet.Contains(c));
     }
 }
