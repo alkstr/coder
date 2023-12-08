@@ -1,4 +1,3 @@
-using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
@@ -41,7 +40,6 @@ public partial class MainWindow : Window
             return;
         }
         
-        PlainTB.Text = string.Concat(PlainTB.Text.Select(char.ToLower));
         EncodedTB.Text = Core.CaesarCipher.Encoder.Encode(PlainTB.Text, shift);
     }
 
@@ -58,7 +56,6 @@ public partial class MainWindow : Window
             return;
         }
         
-        EncodedTB.Text = string.Concat(EncodedTB.Text.Select(char.ToLower));
         PlainTB.Text = Core.CaesarCipher.Decoder.Decode(EncodedTB.Text, shift);
     }
 
@@ -69,8 +66,9 @@ public partial class MainWindow : Window
             ShowErrorFlyout(source, "Зашифрованный текст не может быть пустым");
             return;
         }
-
-        EncodedTB.Text = string.Concat(EncodedTB.Text.Select(char.ToLower));
-        PlainTB.Text = Core.CaesarCipher.Cracker.Crack(EncodedTB.Text);
+        
+        var (shift, cracked) = Core.CaesarCipher.Cracker.Crack(EncodedTB.Text);
+        ShiftTB.Text = shift.ToString();
+        PlainTB.Text = cracked;
     }
 }
